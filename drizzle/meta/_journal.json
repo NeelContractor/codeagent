@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1790400865719,
+      "tag": "0000_yummy_maria_hill",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790404703924,
+      "tag": "0001_snapshot_metadata",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790408313298,
+      "tag": "0002_mean_felicia_hardy",
+      "breakpoints": true
+    }
+  ]
+}

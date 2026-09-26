@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: codeagent-postgres
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER:-codeagent}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-codeagent_dev}"
+      POSTGRES_DB: "${POSTGRES_DB:-codeagent}"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-codeagent} -d ${POSTGRES_DB:-codeagent}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  postgres_data:
+    name: codeagent_postgres_data
