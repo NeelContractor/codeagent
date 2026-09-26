@@ -29,14 +29,22 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <body className="min-h-full flex flex-col">{children}</body>
-      </ThemeProvider>
+      {/*
+        ThemeProvider must live *inside* <body>. It injects a blocking inline
+        script that reads localStorage before paint; wrapping <body> instead
+        makes that script a direct child of <html>, which is invalid HTML and
+        triggers a hydration error plus a possible flash of the wrong theme.
+      */}
+      <body className="min-h-full flex flex-col">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
